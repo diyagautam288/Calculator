@@ -1,0 +1,53 @@
+function App (){
+  const [exp,setExp]=React.useState('');
+  const [ans,setAns]=React.useState(0);
+  const Display = (symbol) => {
+    setExp((prev) => prev+symbol);
+    if(exp[exp.length-1]=="=")
+      {
+        if(/[1-9.]/.test(symbol))
+          {
+            setExp(symbol);
+          }
+        else
+          {
+            setExp(ans+symbol);
+          }
+      }
+  };
+ const calculate =()=>{
+   setAns(eval(exp));
+   setExp((prev) => prev+"=");
+ };
+  const Clear=()=>{
+    setExp("");
+    setAns("");
+  }
+    return <div className="container">
+      <div className="grid">
+        <div id="display" className="dis">
+          <input type="text" value={exp} placeholder="0" disabled/>
+          <div className="Ans">{ans}</div>
+        </div>
+        <div id="clear" onClick={Clear} className="padButton AC">AC</div>
+        <div id="divide" onClick={() => Display("/")} className="padButton div">/</div>
+        <div id="multiply" onClick={() => Display("x")} className="padButton mul">x</div>
+        <div id="seven" onClick={() => Display("7")} className="padButton seven">7</div>
+        <div id="eight" onClick={() => Display("8")} className="padButton eight">8</div>
+        <div id="nine" onClick={() => Display("9")} className="padButton nine">9</div>
+        <div id="subtract" onClick={() => Display("-")} className="padButton sub">-</div>
+        <div id="four" onClick={() => Display("4")} className="padButton four">4</div>
+        <div id="five" onClick={() => Display("5")} className="padButton five">5</div>
+        <div id="six" onClick={() => Display("6")} className="padButton six">6</div>
+        <div id="add" onClick={() => Display("+")} className="padButton plus">+</div>
+        <div id="one" onClick={() => Display("1")} className="padButton one">1</div>
+        <div id="two" onClick={() => Display("2")} className="padButton two">2</div>
+        <div id="three" onClick={() => Display("3")} className="padButton three">3</div>
+        <div id="equals" onClick={calculate} className="padButton equal">=</div>
+        <div id="zero" onClick={() => Display("0")} className="padButton zero">0</div>
+        <div id="decimal" onClick={() => Display(".")} className="padButton period">.</div>        
+      </div>
+    </div>
+  
+}
+ReactDOM.render(<App/>,document.getElementById('app'));
